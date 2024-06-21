@@ -1,0 +1,29 @@
+<div class="input">
+    <mat-form-field class="query-form-field">
+        <mat-label>Query</mat-label>
+        <input matInput type="text" [(ngModel)]="query" placeholder="Enter your query here"/>
+    </mat-form-field>
+    
+    <button mat-flat-button (click)="textSearch()">Text Search</button>
+
+    <button mat-flat-button (click)="imgageFileInput.click()">Image Search</button>
+    <input hidden #imgageFileInput type="file" (change)="imageSearch($event)">
+
+    <button mat-flat-button (click)="videoFileInput.click()">Video Search</button>
+    <input hidden #videoFileInput type="file" (change)="videoSearch($event)">
+</div>
+
+<div *ngIf="result$ | async as result">
+    <!-- {{result | json}} -->
+    <div *ngFor="let item of result.objects">
+        <img *ngIf="item.properties.media == 'image'" 
+             [src]="'/assets/image/' + item.properties.name"
+             width="320" height="240"
+        >
+        <video *ngIf="item.properties.media == 'video'"
+                width="320" height="240" controls>
+            <source [src]="'/assets/video/' + item.properties.name" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </div>
+</div>

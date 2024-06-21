@@ -1,0 +1,37 @@
+<!-- <h1>Search</h1> -->
+
+<div class="input">
+    <mat-form-field class="query-form-field">
+        <mat-label>Query</mat-label>
+        <input matInput type="text" [(ngModel)]="query" placeholder="Enter your query here"/>
+    </mat-form-field>
+    <mat-form-field class="query-form-field">
+        <mat-label>Prompt</mat-label>
+        <input matInput type="text" [(ngModel)]="prompt" placeholder="Enter your query here"/>
+    </mat-form-field>
+    
+    <button mat-flat-button (click)="rag()">RAG</button>
+</div>
+
+<div *ngIf="result$ | async as result" class="result">
+    <mat-card *ngIf="result.generated" appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>Generated response:</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>{{ result.generated }}</mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" *ngFor="let item of result.objects">
+        <mat-card-header>
+            <mat-card-title>{{ item.properties.title }}  <span *ngIf="item.generated"> | {{ item.generated }}</span></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>{{ item.properties.text }}</mat-card-content>
+
+        <mat-card-footer class="example-card-footer">
+            <mat-chip-set aria-label="Chihuahua traits">
+                <mat-chip *ngIf="item.metadata.score">{{item.metadata.score}}</mat-chip>
+                <mat-chip *ngIf="item.metadata.distance">{{item.metadata.distance}}</mat-chip>
+            </mat-chip-set>
+        </mat-card-footer>
+    </mat-card>
+</div>
