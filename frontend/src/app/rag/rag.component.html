@@ -45,8 +45,8 @@
            
         </div>
 
-        <div class="grid grid-cols-3">
-            <div  *ngIf="result$ | async as result" class="flex items-start justify-center col-span-3 pt-4">
+        <div *ngIf="result$ | async as result" class="grid grid-cols-3">
+            <div class="flex items-start justify-center col-span-3 pt-4">
               <div
                 class="item-start flex z-10 mt-2 w-[750px] divide-y divide-gray-100 rounded-md border border-gray-100 bg-slate-200 shadow-s"
                 role="menu">
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div  *ngIf="result$ | async as result" class="flex justify-center col-span-3 translate-y-[1rem] pb-10">
+            <div class="flex justify-center col-span-3 translate-y-[1rem] pb-10">
               <div
                 class="flex z-10 mt-2 w-[750px] divide-gray-100 rounded-md border border-gray-100 bg-slate-200 shadow-s"
                 role="menu">
