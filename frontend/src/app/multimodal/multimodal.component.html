@@ -1,29 +1,126 @@
-<div class="input">
-    <mat-form-field class="query-form-field">
-        <mat-label>Query</mat-label>
-        <input matInput type="text" [(ngModel)]="query" placeholder="Enter your query here"/>
-    </mat-form-field>
+
+
+<div class="flex min-h-screen w-full flex-col items-center">
+    <main>
+        <div class="items-center justify-center flex pt-4">
+            <img class="w-36" src="logo.png">
+        </div>
+        <h1 class="text-4xl pt-5 font-bold text-black text-center">
+            Multimodal Search with Weaviate
+        </h1>
     
-    <button mat-flat-button (click)="textSearch()">Text Search</button>
+        <div class="items-center pb-6 pt-10 p-8">
+            <h2 class="sr-only">Steps</h2>
+    
+            <div class="items-center flex justify-center">
+                <p class="text-center text-m">
+                    Search through what ever you want!
+                </p>
+            </div>
+        </div>
+    
+        <div class="justify-center items-center">
+            <div class="flex items-center justify-center pt-3">
+                <label for="Search" class="sr-only"> Search </label>
+    
+                <input [(ngModel)]="query" type="text" id="SearchTerm" placeholder="what are you looking for?"
+                    class="w-2/3 rounded-md border-gray-200 bg-slate-300 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
+            </div>
+            <p class="item-center flex justify-center text-xs text-gray-600 pt-2 pb-4">
+                try and search for "posts on animals"
+            </p>
+    
+            <div class="flex items-start justify-center pt-3 gap-2">
+    
+                <button (click)="textSearch()"
+                    class="inline-block rounded border border-white bg-black px-9 py-3 text-sm font-medium text-lime-500 transition hover:border-black hover:bg-lime-500 hover:text-black focus:outline-none focus:ring focus:ring-yellow-400">
+                    Text Search
+                </button>
+                <label
+                    class="p-2.5 ms-2 text-sm font-medium text-white flex bg-black rounded border border-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 cursor-pointer translate-y-[0.12rem]">
+                    <svg class="w-5 h-5" viewBox="1 2 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z"
+                                stroke="#84cc16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                            <path
+                                d="M3 16.8V9.2C3 8.0799 3 7.51984 3.21799 7.09202C3.40973 6.71569 3.71569 6.40973 4.09202 6.21799C4.51984 6 5.0799 6 6.2 6H7.25464C7.37758 6 7.43905 6 7.49576 5.9935C7.79166 5.95961 8.05705 5.79559 8.21969 5.54609C8.25086 5.49827 8.27836 5.44328 8.33333 5.33333C8.44329 5.11342 8.49827 5.00346 8.56062 4.90782C8.8859 4.40882 9.41668 4.08078 10.0085 4.01299C10.1219 4 10.2448 4 10.4907 4H13.5093C13.7552 4 13.8781 4 13.9915 4.01299C14.5833 4.08078 15.1141 4.40882 15.4394 4.90782C15.5017 5.00345 15.5567 5.11345 15.6667 5.33333C15.7216 5.44329 15.7491 5.49827 15.7803 5.54609C15.943 5.79559 16.2083 5.95961 16.5042 5.9935C16.561 6 16.6224 6 16.7454 6H17.8C18.9201 6 19.4802 6 19.908 6.21799C20.2843 6.40973 20.5903 6.71569 20.782 7.09202C21 7.51984 21 8.0799 21 9.2V16.8C21 17.9201 21 18.4802 20.782 18.908C20.5903 19.2843 20.2843 19.5903 19.908 19.782C19.4802 20 18.9201 20 17.8 20H6.2C5.0799 20 4.51984 20 4.09202 19.782C3.71569 19.5903 3.40973 19.2843 3.21799 18.908C3 18.4802 3 17.9201 3 16.8Z"
+                                stroke="#84cc16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                        </g>
+                    </svg>
+                    <input (change)="imageSearch($event)" type='file' class="hidden" />
+                    <span class="pl-1"> Image Search</span>
+                </label>
+                <label
+                    class="p-2.5 ms-2 text-sm font-medium text-white flex bg-black rounded border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 cursor-pointer translate-y-[0.12rem]">
+                    <svg class="w-5 h-5" viewBox="1 2 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M9.5 9V15M6.5 12H12.5M16 10L18.5768 8.45392C19.3699 7.97803 19.7665 7.74009 20.0928 7.77051C20.3773 7.79703 20.6369 7.944 20.806 8.17433C21 8.43848 21 8.90095 21 9.8259V14.1741C21 15.099 21 15.5615 20.806 15.8257C20.6369 16.056 20.3773 16.203 20.0928 16.2295C19.7665 16.2599 19.3699 16.022 18.5768 15.5461L16 14M6.2 18H12.8C13.9201 18 14.4802 18 14.908 17.782C15.2843 17.5903 15.5903 17.2843 15.782 16.908C16 16.4802 16 15.9201 16 14.8V9.2C16 8.0799 16 7.51984 15.782 7.09202C15.5903 6.71569 15.2843 6.40973 14.908 6.21799C14.4802 6 13.9201 6 12.8 6H6.2C5.0799 6 4.51984 6 4.09202 6.21799C3.71569 6.40973 3.40973 6.71569 3.21799 7.09202C3 7.51984 3 8.07989 3 9.2V14.8C3 15.9201 3 16.4802 3.21799 16.908C3.40973 17.2843 3.71569 17.5903 4.09202 17.782C4.51984 18 5.07989 18 6.2 18Z"
+                                stroke="#84cc16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                    </svg>
+                    <input (change)="videoSearch($event)" type='file' class="hidden" />
+                    <span class="pl-1"> Video Search</span>
+                </label>
+            </div>
+    
+    
+    
+            <!-- <div v-if="loading" class="flex items-start justify-center">
+            <svg aria-hidden="true" class="w-8 h-8 my-2 text-gray-200 animate-spin fill-lime-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+      </div> -->
+        </div>
+    
+    </main>
 
-    <button mat-flat-button (click)="imgageFileInput.click()">Image Search</button>
-    <input hidden #imgageFileInput type="file" accept="image/*" (change)="imageSearch($event)">
+<div *ngIf="result$ | async as result" class="relative flex grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 p-20">
 
-    <button mat-flat-button (click)="videoFileInput.click()">Video Search</button>
-    <input hidden #videoFileInput type="file" accept="video/*" (change)="videoSearch($event)">
-</div>
-
-<div *ngIf="result$ | async as result">
-    <!-- {{result | json}} -->
     <div *ngFor="let item of result.objects">
-        <img *ngIf="item.properties.media == 'image'" 
-             [src]="'/assets/image/' + item.properties.name"
-             width="320" height="240"
-        >
-        <video *ngIf="item.properties.media == 'video'"
-                width="320" height="240" controls>
-            <source [src]="'/assets/video/' + item.properties.name" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+
+        <div class="h-40 w-50">
+            <div class="flex justify-between">
+                <p
+                    class="w-16 h-6 mt-2 ml-2 block text-center whitespace-nowrap items-center justify-center rounded-lg translate-y-8 transform  bg-white px-2.5 py-0.5 text-sm text-black">
+                    {{ item?.properties.media }}
+                </p>
+                <p
+                    class="w-24 h-6 mt-2 mr-2 block text-center whitespace-nowrap items-center justify-end rounded-lg translate-y-8 transform  bg-white px-2.5 py-0.5 text-sm text-black">
+                    dist: {{ result.metadata?.distance?.toString().slice(0,6) }}
+                </p>
+            </div>
+            <img *ngIf="item.properties.media == 'image'" alt="Certainty: "
+                class='block object-cover w-full h-full rounded-lg' [src]="'/assets/image/' + item.properties.name" />
+
+
+            <video controls *ngIf="item.properties.media == 'video'" [src]="'/assets/video/' + item.properties.name"
+                class='block object-fit w-full h-full rounded-lg'>
+                Your browser does not support the video element.
+            </video>
+
+        </div>
     </div>
 </div>
+</div>
+
+<!-- <div *ngIf="result$ | async as result">
+    {{result | json}}
+    <div *ngFor="let item of result.objects">
+        <img *ngIf="item.properties.media == 'image'" [src]="'/assets/image/' + item.properties.name" width="320"
+            height="240">
+        <video *ngIf="item.properties.media == 'video'" width="320" height="240" controls>
+            <source [src]="'/assets/video/' + item.properties.name" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div> -->
+
