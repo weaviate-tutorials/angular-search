@@ -1,10 +1,22 @@
-<mat-toolbar>  
-    <mat-toolbar-row>
-        <button mat-button routerLink="/">Search</button>
-        <button mat-button routerLink="/rag">RAG</button>
-        <button mat-button routerLink="/multimodal">Multimodal</button>
-    </mat-toolbar-row>
-</mat-toolbar>
+<header class="bg-white">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-center">
+
+            <div class="hidden md:block">
+                <nav aria-label="Global">
+                    <div class="flex items-center gap-16 text-xl font-bold">
+                        <button class="text-black transition hover:text-gray-500/75" routerLink="/">Search</button>
+                        <button class="text-black transition hover:text-gray-500/75" routerLink="/rag">RAG</button>
+                        <button class="text-black transition hover:text-gray-500/75"
+                            routerLink="/multimodal">Multimodal</button>
+                    </div>
+                </nav>
+            </div>
+
+
+        </div>
+    </div>
+</header>
 
 <div class="page">
     <router-outlet></router-outlet>
