@@ -1,15 +1,5 @@
 <!-- <h1>Search</h1> -->
 
-<!-- <div class="input">
-    <mat-form-field class="query-form-field">
-        <mat-label>Query</mat-label>
-        <input matInput type="text" [(ngModel)]="query" placeholder="Enter your query here"/>
-    </mat-form-field>
-    
-    <button mat-flat-button (click)="search()">Semantic Search</button>
-    <button mat-flat-button (click)="hybrid()">Hybrid Search</button>
-</div> -->
-
 <main div class="flex min-h-screen w-full flex-col items-center">
     <div class="items-center justify-center flex pt-4">
         <img class="w-36" src="logo.png">
@@ -29,8 +19,8 @@
     </div>
 
     <div class="justify-center items-center">
-        <div class="flex items-center justify-center pt-3">
-            <label for="Search" class="sr-only"> Search </label>
+        <div class="flex flex-col items-center justify-center pt-3">
+            <label class="block text-xs font-medium text-gray-700"> Query </label>
 
             <input [(ngModel)]="query" type="text" id="SearchTerm" placeholder="what are you looking for?"
                 class="w-2/3 rounded-md border-gray-200 bg-slate-300 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
@@ -93,22 +83,3 @@
     </div>
 
 </main>
-
-
-
-<!-- <div *ngIf="result$ | async as result" class="result">
-    <mat-card appearance="outlined" *ngFor="let item of result.objects">
-        <mat-card-header>
-            <mat-card-title>{{ item.properties.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>{{ item.properties.text }}</mat-card-content>
-
-        <mat-card-footer class="example-card-footer">
-            <mat-chip-set aria-label="Chihuahua traits">
-                <mat-chip *ngIf="item.metadata.score">{{item.metadata.score}}</mat-chip>
-                <mat-chip *ngIf="item.metadata.distance">{{item.metadata.distance}}</mat-chip>
-            </mat-chip-set>
-        </mat-card-footer>
-    </mat-card>
-
-</div> -->
