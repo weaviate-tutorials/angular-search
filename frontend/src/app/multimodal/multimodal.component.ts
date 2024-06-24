@@ -36,15 +36,15 @@ export class MultimodalComponent {
     this.result$ = this.multimodal.textSearch(this.query)
   }
 
-  async imageSearch($event: any) {
+  imageSearch($event: any) {
     const file: File = $event.target.files[0];
 
-    this.result$ = await this.multimodal.imageSearch(file);
+    this.result$ = this.multimodal.imageSearch(file);
   }
 
-  async videoSearch($event: any) {
+  videoSearch($event: any) {
     const file: File = $event.target.files[0];
 
-    this.result$ = await this.multimodal.videoSearch(file);
+    this.result$ = this.multimodal.videoSearch(file);
   }
 }

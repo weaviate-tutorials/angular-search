@@ -11,7 +11,40 @@ export class MultimodalService {
 
   constructor(private http: HttpClient) {}
 
-  async imageSearch(file: File) {
+
+  textSearch(query: string) {
+    return this.http.post(
+      'http://localhost:3000/multimodal/textSearch',
+      { query }
+    ).pipe(
+      tap(logResults)
+    )
+  }
+
+  imageSearch(file: File) {
+    const formData = new FormData();
+    formData.append('searchFile', file);
+
+    return this.http.post("http://localhost:3000/multimodal/imageSearch", formData)
+    .pipe(
+      tap(logResults)
+    )
+  }
+
+  videoSearch(file: File) {
+    const formData = new FormData();
+    formData.append('searchFile', file);
+
+    return this.http.post("http://localhost:3000/multimodal/videoSearch", formData)
+    .pipe(
+      tap(logResults)
+    )
+  }
+
+  //  –––––– BASE64 ––––––
+  // Alternative methods when we want to send a base64 string of the file,
+  // instead of sending the file
+  async imageSearchB64(file: File) {
     const b64 = await this.toBase64FromFile(file);
     console.log({ b64 })
 
@@ -23,7 +56,7 @@ export class MultimodalService {
     )
   }
 
-  async videoSearch(file: File) {
+  async videoSearchB64(file: File) {
     const b64 = await this.toBase64FromFile(file);
     console.log({ b64 })
 
@@ -35,16 +68,7 @@ export class MultimodalService {
     )
   }
 
-  textSearch(query: string) {
-    return this.http.post(
-      'http://localhost:3000/multimodal/textSearch',
-      { query }
-    ).pipe(
-      tap(logResults)
-    )
-  }
-
-  // ––– HELPER FUNCTIONS –––
+  // –––––– BASE64 HELPER FUNCTIONS ––––––
   private async toBase64FromFile(file: File) {
     return this.toBase64(file);
   }

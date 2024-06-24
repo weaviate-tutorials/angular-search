@@ -42,11 +42,6 @@ export class MultimodalService {
         return this._client;
     }
 
-    // Multimodal Service Init
-    // private async onModuleInit(): Promise<void> {
-    //     await this.connectToWeaviate()
-    // }
-
     // Multimodal Service Destroy
     private async onModuleDestroy() {
         if(this._client) {
@@ -60,6 +55,16 @@ export class MultimodalService {
 
         const gallery = client.collections.get<MediaObject>('PalmMultimodalSearch')
         return gallery.query.nearText(query, {
+            limit: 5,
+            // filters: gallery.filter.byProperty('media').equal('image')
+        })
+    }
+
+    async searchWithVideoFile(file: any) {
+        const client = await this.getClient()
+
+        const gallery = client.collections.get('PalmMultimodalSearch')
+        return gallery.query.nearImage(file, {
             limit: 5,
             // filters: gallery.filter.byProperty('media').equal('image')
         })
