@@ -80,7 +80,7 @@
                     {{ item?.properties.media }}
                     </p>
                     <p class="w-24 h-6 mt-2 mr-2 block text-center whitespace-nowrap items-center justify-end rounded-lg translate-y-8 transform  bg-white px-2.5 py-0.5 text-sm text-black">
-                    dist: {{ result.metadata?.distance?.toString().slice(0,6) }}
+                    dist: {{ item.metadata?.distance?.toString().slice(0,6) }}
                     </p>
                 </div>
                 <img *ngIf="item.properties.media == 'image'" 
