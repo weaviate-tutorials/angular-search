@@ -1,4 +1,4 @@
-<main class="flex min-h-screen w-full flex-col items-center">
+<main class="">
     <div class="items-center justify-center flex pt-4">
         <img class="w-36" src="logo.png">
     </div>
@@ -17,17 +17,17 @@
     </div>
 
     <div class="justify-center items-center">
-        <div class="flex items-center justify-center pt-3">
-            <label for="Search" class=""> Search </label>
+        <div class="flex flex-col items-center justify-center pt-3">
+            <label class="block text-xs font-medium text-gray-700"> Query </label>
 
             <input [(ngModel)]="query" type="text" id="SearchTerm" placeholder="what are you looking for?"
-                class="w-full rounded-md border-gray-200 bg-slate-300 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
+                class="w-3/5 rounded-md border-gray-200 bg-slate-300 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
         </div>
-        <div class="flex items-center justify-center pt-3">
-            <label for="Search" class=""> Prompt </label>
+        <div class="flex flex-col items-center justify-center pt-3">
+            <label class="block text-xs font-medium text-gray-700"> Prompt </label>
 
             <input [(ngModel)]="prompt" type="text" id="Prompt" placeholder="your prompt"
-             class="w-2/3 rounded-md border-gray-200 bg-slate-300 px-8 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
+             class="w-1/3 rounded-md border-gray-200 bg-slate-300 px-8 py-2.5 pl-4 pe-10 shadow-sm sm:text-sm placeholder:text-gray-800" />
         </div>
         <p class="item-center flex justify-center text-xs text-gray-600 pt-2 pb-4">
             try and search for "dynamics of flight"
