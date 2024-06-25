@@ -53,7 +53,7 @@ export class MultimodalService {
     async searchWithText(query: string) {
         const client = await this.getClient()
 
-        const gallery = client.collections.get<MediaObject>('PalmMultimodalSearch')
+        const gallery = client.collections.get<MediaObject>('MyMedia')
         return gallery.query.nearText(query, {
             limit: 5,
             // filters: gallery.filter.byProperty('media').equal('image')
@@ -63,7 +63,7 @@ export class MultimodalService {
     async searchWithVideoFile(file: any) {
         const client = await this.getClient()
 
-        const gallery = client.collections.get('PalmMultimodalSearch')
+        const gallery = client.collections.get('MyMedia')
         return gallery.query.nearImage(file, {
             limit: 5,
             // filters: gallery.filter.byProperty('media').equal('image')
@@ -73,7 +73,7 @@ export class MultimodalService {
     async searchWithImage(b64Image: string) {
         const client = await this.getClient()
 
-        const gallery = client.collections.get('PalmMultimodalSearch')
+        const gallery = client.collections.get('MyMedia')
         return gallery.query.nearImage(b64Image, {
             limit: 5,
             // filters: gallery.filter.byProperty('media').equal('image')
@@ -83,7 +83,7 @@ export class MultimodalService {
     async searchWithVideo(b64Video: string) {
         const client = await this.getClient()
 
-        const gallery = client.collections.get('PalmMultimodalSearch')
+        const gallery = client.collections.get('MyMedia')
         return gallery.query.nearMedia(b64Video, 'video', {
             limit: 5
         })

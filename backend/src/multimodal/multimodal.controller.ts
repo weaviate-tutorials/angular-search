@@ -7,6 +7,7 @@ import {
 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MultimodalService } from './multimodal.service';
+import { MultimodalSetupService } from './multimodal-setup.service';
 
 const imageValidator = new ParseFilePipe({
     validators: [
@@ -26,13 +27,31 @@ const videoValidator = new ParseFilePipe({
 @Controller('multimodal')
 export class MultimodalController {
     
-    constructor(private readonly multimodalService: MultimodalService) {}
+    constructor(
+        private readonly searchService: MultimodalService,
+        private readonly setupService: MultimodalSetupService,
+    ) {}
+
+    @Post('setup/createCollection')
+    async createCollection() {
+        return this.setupService.createMultimodalCollection(true)
+    }
+
+    @Post('setup/importImages')
+    async importImages() {
+        return this.setupService.importImages()
+    }
+
+    @Post('setup/importVideos')
+    async importVideos() {
+        return this.setupService.importVideos()
+    }
     
     @Post('textSearch')
     async textSearch(@Body('query') query) {
         console.log({query});
         
-        return this.multimodalService.searchWithText(query)
+        return this.searchService.searchWithText(query)
     }
 
     @Post('imageSearch')
@@ -42,7 +61,7 @@ export class MultimodalController {
 
         const b64 = file.buffer.toString('base64');
 
-        return this.multimodalService.searchWithImage(b64)
+        return this.searchService.searchWithImage(b64)
     }
 
     @Post('videoSearch')
@@ -52,7 +71,7 @@ export class MultimodalController {
 
         const b64 = file.buffer.toString('base64');
 
-        return this.multimodalService.searchWithVideo(b64)
+        return this.searchService.searchWithVideo(b64)
     }
     
     // Alternative methods when we want to send a base64 string of the file,
@@ -62,13 +81,13 @@ export class MultimodalController {
     async imageSearch(@Body('b64') b64) {
         console.log({b64});
         
-        return this.multimodalService.searchWithImage(b64)
+        return this.searchService.searchWithImage(b64)
     }
     
     @Post('videoSearchB64')
     async videoSearch(@Body('b64') b64) {
         console.log({b64});
         
-        return this.multimodalService.searchWithVideo(b64)
+        return this.searchService.searchWithVideo(b64)
     }
 }
