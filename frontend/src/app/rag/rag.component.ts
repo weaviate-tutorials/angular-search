@@ -3,12 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-
 import { Observable, tap } from 'rxjs';
 import { logResults } from '../utils';
 
@@ -17,16 +11,9 @@ import { logResults } from '../utils';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule,    
-    
-    MatFormFieldModule,
-    MatInput,
-    MatButton,
-    MatCardModule,
-    MatChipsModule,
+    CommonModule,
   ],
-  templateUrl: './rag.component.html',
-  styleUrl: './rag.component.scss'
+  templateUrl: './rag.component.html'
 })
 export class RagComponent {
   query = 'Dynamics of plane flight'
