@@ -2,7 +2,7 @@
 
 This repo should help get you started developing with Weaviate and Angular.
 
-![Logo Gif]()
+![Logo Gif](https://github.com/weaviate-tutorials/angular-search/blob/main/angular.gif)
 
 ## 🐥 Get Started
 
