@@ -3,7 +3,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import weaviate, { Collection, WeaviateClient } from 'weaviate-client';
 const { dataType, vectorizer } = weaviate.configure;
 
-import * as fs from 'fs';
 import { join } from 'path';
 
 import { readdirSync, readFileSync } from 'fs'
@@ -179,9 +178,9 @@ export class MultimodalSetupService {
     }
 
     toBase64(fileUrl: string) {
-        const path = join(process.cwd(), fileUrl)
-        console.log(path)
+        // const path = join(process.cwd(), fileUrl)
+        // console.log(path)
 
-        return readFileSync(path, { encoding: 'base64' })
+        return readFileSync(fileUrl, { encoding: 'base64' })
     }
 }

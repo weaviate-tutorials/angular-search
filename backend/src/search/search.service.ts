@@ -38,10 +38,6 @@ export class WeaviateSearchService {
         return this._client;
     }
 
-    // private async onModuleInit(): Promise<void> {
-    //     this._client = await this.connectToWeaviate()
-    // }
-
     private async onModuleDestroy() {
         if(this._client) {
             console.log('Query Service:: Closing the Weaviate Client')
