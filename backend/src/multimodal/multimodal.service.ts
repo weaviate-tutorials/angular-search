@@ -68,7 +68,6 @@ export class MultimodalService {
         return gallery.query.nearImage(file, {
             limit: 8,
             returnMetadata: ['distance'],
-            // filters: gallery.filter.byProperty('media').equal('image')
         })
     }
 
@@ -79,7 +78,6 @@ export class MultimodalService {
         return gallery.query.nearImage(b64Image, {
             limit: 8,
             returnMetadata: ['distance'],
-            // filters: gallery.filter.byProperty('media').equal('image')
         })
     }
 
@@ -88,7 +86,8 @@ export class MultimodalService {
 
         const gallery = client.collections.get('MyMedia')
         return gallery.query.nearMedia(b64Video, 'video', {
-            limit: 5
+            limit: 8,
+            returnMetadata: ['distance'],
         })
     }
 }
