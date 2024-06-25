@@ -27,11 +27,6 @@ export class WeaviateSetupService {
         }
     }
 
-    // Setup Service Init
-    // private async onModuleInit(): Promise<void> {
-    //     await this.connectToWeaviate()
-    // }
-
     private async getClient(): Promise<WeaviateClient> {
         if(!this._client) {
             this._client = await this.connectToWeaviate();
