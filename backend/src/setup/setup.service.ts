@@ -9,7 +9,7 @@ import * as readline from 'readline';
 export class WeaviateSetupService {
     private _client: WeaviateClient = null;
     private async connectToWeaviate(): Promise<WeaviateClient> {
-        const url = process.env.WEAVIATE_URL;
+        const url = process.env.WEAVIATE_HOST_URL;
         const adminKey = process.env.WEAVIATE_ADMIN_KEY;
 
         console.log('Setup Service:: Connecting to Weaviate')

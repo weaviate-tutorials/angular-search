@@ -52,9 +52,9 @@ And update `GOOGLE_API_KEY` in `backend/.env` file.
 Add `.env` file to the backed folder with the following values:
 
 ```
-export WEAVIATE_URL=your-weaviate-cloud-url
+export WEAVIATE_HOST_URL=your-weaviate-cloud-url
 export WEAVIATE_ADMIN_KEY=your-weaviate-cloud-apikei
-export WEAVIATE_QUERY_KEY=your-weaviate-cloud-apikei
+export WEAVIATE_READ_KEY=your-weaviate-cloud-apikei
 export COHERE_API_KEY=your-cohere-key
 export GOOGLE_API_KEY=your-google-vertex-key
 ```
