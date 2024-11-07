@@ -11,15 +11,15 @@ export type MediaObject = {
 export class MultimodalService {
     private _client: WeaviateClient = null;
 
-    private async connectToWeaviate(): Promise<WeaviateClient> {        
-        const url = process.env.WEAVIATE_URL;
-        const adminKey = process.env.WEAVIATE_ADMIN_KEY;
+    private async connectToWeaviate(): Promise<WeaviateClient> {
+        const url = process.env.WEAVIATE_HOST_URL;
+        const queryKey = process.env.WEAVIATE_QUERY_KEY;
         const googleKey = process.env.GOOGLE_API_KEY;
 
         console.log('Multimodal Service:: Connecting to Weaviate')
         try {
             const client = await weaviate.connectToWeaviateCloud(url, {
-                authCredentials: new weaviate.ApiKey(adminKey),
+                authCredentials: new weaviate.ApiKey(queryKey),
                 headers: {
                     'x-palm-api-key': googleKey
                 }
@@ -53,23 +53,16 @@ export class MultimodalService {
     async searchWithText(query: string) {
         const client = await this.getClient()
 
+        // get collection 'MyMedia'
         const gallery = client.collections.get<MediaObject>('MyMedia')
+
+        // nearText search
         return gallery.query.nearText(query, {
             limit: 8,
             returnMetadata: ['distance'],
-            // filters: gallery.filter.byProperty('media').equal('image')
         })
     }
 
-    async searchWithVideoFile(file: any) {
-        const client = await this.getClient()
-
-        const gallery = client.collections.get('MyMedia')
-        return gallery.query.nearImage(file, {
-            limit: 8,
-            returnMetadata: ['distance'],
-        })
-    }
 
     async searchWithImage(b64Image: string) {
         const client = await this.getClient()
@@ -86,6 +79,17 @@ export class MultimodalService {
 
         const gallery = client.collections.get('MyMedia')
         return gallery.query.nearMedia(b64Video, 'video', {
+            // limit: 8,
+            autoLimit: 2,
+            returnMetadata: ['distance'],
+        })
+    }
+
+    async searchWithVideoFile(file: any) {
+        const client = await this.getClient()
+
+        const gallery = client.collections.get('MyMedia')
+        return gallery.query.nearImage(file, {
             limit: 8,
             returnMetadata: ['distance'],
         })

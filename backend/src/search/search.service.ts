@@ -7,7 +7,7 @@ export class WeaviateSearchService {
 
     private async connectToWeaviate(): Promise<WeaviateClient> {
         const url = process.env.WEAVIATE_HOST_URL;
-        const queryKey = process.env.WEAVIATE_READ_KEY;
+        const queryKey = process.env.WEAVIATE_QUERY_KEY;
         const cohereKey = process.env.COHERE_API_KEY;
         const openaiKey = process.env.OPENAI_API_KEY;
 

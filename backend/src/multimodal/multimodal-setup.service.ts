@@ -11,7 +11,7 @@ import { readdirSync, readFileSync } from 'fs'
 export class MultimodalSetupService {
     private _client: WeaviateClient = null;
 
-    private async connectToWeaviate(): Promise<WeaviateClient> {        
+    private async connectToWeaviate(): Promise<WeaviateClient> {
         const url = process.env.WEAVIATE_HOST_URL;
         const adminKey = process.env.WEAVIATE_ADMIN_KEY;
         const googleKey = process.env.GOOGLE_API_KEY;
@@ -50,7 +50,6 @@ export class MultimodalSetupService {
         }
     }
 
-
     async createMultimodalCollection(recreate: boolean = false) {
         const client = await this.getClient()
 
@@ -60,14 +59,14 @@ export class MultimodalSetupService {
 
         client.collections.create({
             name: 'MyMedia',
-            vectorizers: vectorizer.multi2VecPalm({
+            vectorizers: vectorizer.multi2VecGoogle({
                 imageFields: ['image'],
                 videoFields: ['video'],
 
                 projectId: "semi-random-dev",
                 location: "us-central1",
                 modelId: "multimodalembedding@001",
-                dimensions: 1408, // default setting: 1408 available settings: 128, 256, 512, 1408ar
+                dimensions: 1408
             }),
 
             properties: [
@@ -83,14 +82,13 @@ export class MultimodalSetupService {
         return readdirSync(sourceFolder).map((name) => {
             return {
                 name: name,
-                // path: `${sourceFolder}${name}`,
                 path: join(sourceFolder, name),
             }
         });
     }
 
     async importImages() {
-        // for simplicity, load files from the frontend asset folder
+        // for simplicity, load files from the frontend assets folder
         const imageFiles = this.findFiles('../frontend/public/assets/image')
         console.log(imageFiles)
 
@@ -123,7 +121,7 @@ export class MultimodalSetupService {
     }
 
     async importVideos() {
-        // for simplicity, load files from the frontend asset folder
+        // for simplicity, load files from the frontend assets folder
         const videoFiles = this.findFiles('../frontend/public/assets/video')
         console.log(videoFiles)
 
@@ -178,9 +176,6 @@ export class MultimodalSetupService {
     }
 
     toBase64(fileUrl: string) {
-        // const path = join(process.cwd(), fileUrl)
-        // console.log(path)
-
         return readFileSync(fileUrl, { encoding: 'base64' })
     }
 }
