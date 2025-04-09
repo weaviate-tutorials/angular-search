@@ -87,7 +87,7 @@ export class WeaviateSetupService {
         const filePath = join(process.cwd(), `./files/${fileName}`)
         const file = readline.createInterface({ input: fs.createReadStream(filePath), output: process.stdout, terminal: false });
 
-        const wiki = client.collections.get(collectionName)
+        const wiki = client.collections.use(collectionName)
         let itemsToInsert = []
         let counter = 0;
 
@@ -143,7 +143,7 @@ export class WeaviateSetupService {
         let itemsToInsert = []
         let counter = 0;
         
-        const wiki = client.collections.get(collectionName)
+        const wiki = client.collections.use(collectionName)
         for await (const line of file) {
             counter++;
             if(counter % 1000 == 0)
@@ -195,7 +195,7 @@ export class WeaviateSetupService {
     public async getCollectionCount(collectionName) {
         const client = await this.getClient();
 
-        const wiki = client.collections.get(collectionName)
+        const wiki = client.collections.use(collectionName)
         return wiki.aggregate.overAll()
     }
 
