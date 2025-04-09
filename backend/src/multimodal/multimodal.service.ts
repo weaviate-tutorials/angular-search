@@ -53,7 +53,7 @@ export class MultimodalService {
     async searchWithText(query: string) {
         const client = await this.getClient()
 
-        // get collection 'MyMedia'
+        // get collection 'MyM.collections.use
         const gallery = client.collections.get<MediaObject>('MyMedia')
 
         // nearText search
@@ -64,7 +64,7 @@ export class MultimodalService {
     }
 
 
-    async searchWithImage(b64Image: string) {
+    async searchWithImage(b64I.collections.use
         const client = await this.getClient()
 
         const gallery = client.collections.get('MyMedia')
@@ -74,7 +74,7 @@ export class MultimodalService {
         })
     }
 
-    async searchWithVideo(b64Video: string) {
+    async searchWithVideo(b64V.collections.use
         const client = await this.getClient()
 
         const gallery = client.collections.get('MyMedia')
@@ -84,7 +84,7 @@ export class MultimodalService {
             returnMetadata: ['distance'],
         })
     }
-
+.collections.use
     async searchWithVideoFile(file: any) {
         const client = await this.getClient()
 

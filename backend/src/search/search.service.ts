@@ -47,7 +47,7 @@ export class WeaviateSearchService {
 
     async semanticSearch(query) {
         const client = await this.getClient();
-        const wiki = client.collections.get('Wikipedia')
+        const wiki = client.collections.use('Wikipedia')
 
         // return wiki.query.nearText(query, { limit: 5 })
         return wiki.query.nearText(query, { limit: 5, returnMetadata: [ 'distance' ] })
@@ -55,7 +55,7 @@ export class WeaviateSearchService {
 
     async hybridSearch(query) {
         const client = await this.getClient();
-        const wiki = client.collections.get('Wikipedia')
+        const wiki = client.collections.use('Wikipedia')
 
         return wiki.query.hybrid(query, {
             alpha: 0.7,
@@ -66,7 +66,7 @@ export class WeaviateSearchService {
 
     async rag(query) {
         const client = await this.getClient();
-        const wiki = client.collections.get('Wikipedia')
+        const wiki = client.collections.use('Wikipedia')
 
         const prompts = {
             singlePrompt: 'translate {title} to German',
@@ -82,7 +82,7 @@ export class WeaviateSearchService {
 
     async ragDynamic(query, singlePrompt, groupedTask) {
         const client = await this.getClient();
-        const wiki = client.collections.get('Wikipedia')
+        const wiki = client.collections.use('Wikipedia')
 
         let prompts = {};
         if(singlePrompt)

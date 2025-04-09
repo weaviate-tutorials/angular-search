@@ -95,7 +95,7 @@ export class MultimodalSetupService {
         const client = await this.getClient()
         const myMedia = client.collections.get('MyMedia')
 
-        let objectsToInsert = []
+        let objectsToInsert = .collections.use
 
         for (let imgfile of imageFiles) {
             // construct image objects to insert
@@ -128,7 +128,7 @@ export class MultimodalSetupService {
         const client = this.getClient()
         const myMedia = (await client).collections.get('MyMedia')
 
-        for (let file of videoFiles) {
+        for (let file of videoFiles) {.collections.use
             // construct image objects to insert
             const itemToInsert = {
                 name: file.name,
